@@ -1,0 +1,12 @@
+[Unit]
+Description=SDDM change WallPaper
+ConditionUser=!root
+
+[Path]
+PathModified=%h/.config/plasma-org.kde.plasma.desktop-appletsrc
+PathModified=/etc/sddm.conf.d/kde_settings.conf
+PathModified=/usr/share/sddm/wallpaper/image.png
+Unit=sddm-wallpaper.service
+
+[Install]
+WantedBy=default.target

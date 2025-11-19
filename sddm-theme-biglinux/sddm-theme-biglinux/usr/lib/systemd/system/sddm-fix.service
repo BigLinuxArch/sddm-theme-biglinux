@@ -1,0 +1,11 @@
+[Unit]
+Description=Ensures that SDDM wallpaper is correct
+Before=sddm.service
+Wants=sddm.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/sddm-fix
+
+[Install]
+WantedBy=graphical.target

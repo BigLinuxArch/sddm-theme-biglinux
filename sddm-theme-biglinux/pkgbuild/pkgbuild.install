@@ -1,0 +1,38 @@
+## arg 1:  the new package version
+#pre_install() {
+	# do something here
+#}
+
+## arg 1:  the new package version
+post_install() {
+	if [ ! -e "/etc/systemd/user/default.target.wants/sddm-wallpaper.path" ];then
+		ln -s /usr/lib/systemd/user/sddm-wallpaper.path /etc/systemd/user/default.target.wants/sddm-wallpaper.path
+	fi
+	chmod 666 /usr/share/sddm/wallpaper/image.png
+	user=$(awk -F':' '{ if ($3 >= 1000 && $1 != "nobody") print $1 }' /etc/passwd | head -n1)
+	sudo -u $user XDG_RUNTIME_DIR=/run/user/$(id -u $user) systemctl --user daemon-reload
+	sudo -u $user XDG_RUNTIME_DIR=/run/user/$(id -u $user) systemctl -q --user start sddm-wallpaper.service
+	
+	systemctl enable --now sddm-fix.service
+}
+
+## arg 2:  the old package version
+#pre_upgrade() {
+	# do something here
+#}
+
+## arg 2:  the old package version
+post_upgrade() {
+	post_install
+}
+
+## arg 1:  the old package version
+#pre_remove() {
+	# do something here
+#}
+
+## arg 1:  the old package version
+#post_remove() {
+	# do something here
+#}
+ 
