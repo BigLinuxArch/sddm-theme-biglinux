@@ -1,14 +1,14 @@
 # Maintainer: Bruno Goncalves <bigbruno@gmail.com>
 
 pkgname=sddm-theme-biglinux
-pkgver=$(date +%y.%m.%d)
-pkgrel=$(date +%H%M)
+pkgver=24.10.18
+pkgrel=0114
 arch=('any')
 license=('GPL')
 url="https://github.com/biglinux/sddm-theme-biglinux"
 pkgdesc="Another sddm theme based in breeze"
 depends=('sddm' 'maliit-keyboard')
-source=("git+https://github.com/biglinux/sddm-theme-biglinux.git")
+source=("git+https://github.com/biglinux/sddm-theme-biglinux.git#branch=stable-2024-10-17_22-12")
 md5sums=(SKIP)
 if [ -e "${pkgname}.install" ];then
     install=${pkgname}.install
@@ -38,3 +38,4 @@ package() {
         cp -r "${InternalDir}/opt" "${pkgdir}/"
     fi
 }
+
